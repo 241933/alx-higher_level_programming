@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+import os
+import sys
+
+if name == 'main':
+py_file = os.getenv('PYFILE')
+if py_file is None:
+print("Error: Environment variable PYFILE not set")
+sys.exit(1)
+if not os.path.isfile(py_file):
+print(f"Error: File '{py_file}' not found")
+sys.exit(1)
+py_file_c = py_file + 'c'
+print(f"Compiling {py_file} ...")
+try:
+# Compile the Python file
+pycache = import('py_compile').pycache
+import('py_compile').compile(py_file, cfile=py_file_c, doraise=True)
+except Exception as e:
+print(f"Error: {e}")
+sys.exit(1)
+print(f"{py_file_c} created successfully!")
